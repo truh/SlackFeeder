@@ -79,7 +79,7 @@ Build Python environment:
         };
         Feed = {
             title = "";
-            id = "<random unique id>";
+            id = "";
             link.href = "http://localhost:8080/";
             description = "";
         };

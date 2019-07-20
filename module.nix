@@ -81,7 +81,7 @@ with lib;
 
         ${optionalString Auth.enable ''
         [Auth]
-        enable = ${Auth.enable}
+        enable = ${toString Auth.enable}
         htpasswd = "${Auth.htpasswd}"
         ''}
 
