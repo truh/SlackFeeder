@@ -2,7 +2,7 @@
 # See more at: https://github.com/garbas/pypi2nix
 #
 # COMMAND:
-#   pypi2nix -V 3 -e aiohttp -e slacker -e toml
+#   pypi2nix -V 3 -e aiohttp -e https://github.com/romis2012/aiohttp-basicauth/archive/0.1.2.tar.gz#egg=aiohttp-basicauth -e slacker -e toml
 #
 
 { pkgs ? import <nixpkgs> {}
@@ -91,6 +91,23 @@ let
         homepage = "https://github.com/aio-libs/aiohttp";
         license = licenses.asl20;
         description = "Async http client/server framework (asyncio)";
+      };
+    };
+
+
+
+    "aiohttp-basicauth" = python.mkDerivation {
+      name = "aiohttp-basicauth-0.1.2";
+      src = pkgs.fetchurl { url = "https://github.com/romis2012/aiohttp-basicauth/archive/0.1.2.tar.gz"; sha256 = "50fa36add6c18086da5c7401fb47c517c6f5553f8d6daa6ad1a577225e20ad33"; };
+      doCheck = commonDoCheck;
+      buildInputs = commonBuildInputs;
+      propagatedBuildInputs = [
+      self."aiohttp"
+    ];
+      meta = with pkgs.stdenv.lib; {
+        homepage = "https://github.com/romis2012/aiohttp-basicauth";
+        license = licenses.asl20;
+        description = "HTTP basic authentication middleware for aiohttp 3.0+";
       };
     };
 

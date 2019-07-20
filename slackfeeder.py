@@ -1,8 +1,11 @@
+import json
 import os
 
+import bcrypt
 import toml
 
 from aiohttp import web
+from aiohttp_basicauth import BasicAuthMiddleware
 from feedgen.feed import FeedGenerator
 from slacker import Slacker
 
@@ -71,6 +74,18 @@ def slack_history_to_feedgen(history):
     return fg
 
 
+class CustomBasicAuth(BasicAuthMiddleware):
+    async def check_credentials(self, username, password):
+        try:
+            stored_user, hash = CONFIG["Auth"]["htpasswd"].split(":")
+            password_matches = bcrypt.checkpw(
+                password.encode("utf-8"), hash.encode("utf-8")
+            )
+            return password_matches and username == stored_user
+        except (ValueError, KeyError, TypeError):
+            return False
+
+
 def handle_rss(request):
     history = get_personal_space_history()
     feed_generator = slack_history_to_feedgen(history)
@@ -92,7 +107,14 @@ def handle_atom(request):
 
 
 def webapp():
-    app = web.Application()
+    middlewares = []
+    auth_config = CONFIG.get("Auth", False)
+    if auth_config and auth_config.get("enabled", False):
+        print('Enable basic auth middleware')
+        auth = CustomBasicAuth()
+        middlewares.append(auth)
+
+    app = web.Application(middlewares=middlewares)
 
     app.add_routes([web.get("/rss.xml", handle_rss), web.get("/atom.xml", handle_atom)])
 
