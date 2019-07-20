@@ -44,7 +44,7 @@ with lib;
             };
         };
         Auth = {
-            enabled = mkOption {
+            enable = mkOption {
                 default = false;
                 type = types.bool;
                 description = "Enable basic auth";
@@ -55,25 +55,39 @@ with lib;
                 description = "Bcrypt password hash";
             };
         };
+        Network = {
+            host = mkOption {
+                default = "0.0.0.0";
+                type = types.string;
+            };
+            port = mkOption {
+                default = 8080;
+                type = types.int;
+            };
+        };
     };
 
     config = mkIf config.services.slackfeeder.enable {
-        environment.etc."slackfeeder.toml".text = ''
+        environment.etc."slackfeeder.toml".text = with config.services.slackfeeder; ''
         [Slack]
-        token = "${config.services.slackfeeder.Slack.token}"
+        token = "${Slack.token}"
 
         [Feed]
-        title = "${config.services.slackfeeder.Feed.title}"
-        id = "${config.services.slackfeeder.Feed.id}"
-        link.href = "${config.services.slackfeeder.Feed.link.href}"
-        link.rel = "${config.services.slackfeeder.Feed.link.rel}"
-        description = "${config.services.slackfeeder.Feed.description}"
+        title = "${Feed.title}"
+        id = "${Feed.id}"
+        link.href = "${Feed.link.href}"
+        link.rel = "${Feed.link.rel}"
+        description = "${Feed.description}"
 
-        ${optionalString config.services.slackfeeder.Auth.enabled ''
+        ${optionalString Auth.enable ''
         [Auth]
-        enabled = ${config.services.slackfeeder.Auth.enabled}
-        htpasswd = "${config.services.slackfeeder.Auth.htpasswd}"
+        enable = ${Auth.enable}
+        htpasswd = "${Auth.htpasswd}"
         ''}
+
+        [Network]
+        host = "${Network.host}"
+        port = ${toString Network.port}
         '';
 
         systemd.services.slackfeeder = {

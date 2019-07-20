@@ -86,7 +86,7 @@ class CustomBasicAuth(BasicAuthMiddleware):
             return False
 
 
-def handle_rss(request):
+async def handle_rss(request):
     history = get_personal_space_history()
     feed_generator = slack_history_to_feedgen(history)
     return web.Response(
@@ -96,7 +96,7 @@ def handle_rss(request):
     )
 
 
-def handle_atom(request):
+async def handle_atom(request):
     history = get_personal_space_history()
     feed_generator = slack_history_to_feedgen(history)
     return web.Response(
@@ -109,7 +109,7 @@ def handle_atom(request):
 def webapp():
     middlewares = []
     auth_config = CONFIG.get("Auth", False)
-    if auth_config and auth_config.get("enabled", False):
+    if auth_config and auth_config.get("enable", False):
         print('Enable basic auth middleware')
         auth = CustomBasicAuth()
         middlewares.append(auth)
@@ -123,4 +123,4 @@ def webapp():
 
 if __name__ == "__main__":
     app = webapp()
-    web.run_app(app)
+    web.run_app(app, **CONFIG['Network'])
