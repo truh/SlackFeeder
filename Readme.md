@@ -20,7 +20,7 @@ enabled = true
 htpasswd = ""
 
 [Network]
-host = "0.0.0.0"
+host = "localhost"
 port = 8080
 ```
 
@@ -63,3 +63,34 @@ Update dependencies:
 Build Python environment:
 
     $ nix-build requirements.nix -A interpreter
+    
+## NixOS sample configuration
+
+```nix
+{
+    imports = [
+        "${fetchTarball https://github.com/truh/SlackFeeder/archive/master.tar.gz}/module.nix"
+    ];
+    
+    services.slackfeeder = {
+        enable = true;
+        Slack = {
+            token = "";
+        };
+        Feed = {
+            title = "";
+            id = "<random unique id>";
+            link.href = "http://localhost:8080/";
+            description = "";
+        };
+        Auth = {
+            enable = true;
+            htpasswd = "";
+        };
+        Network = {
+            host = "localhost";
+            port = 8080;
+        };
+    };
+}
+```

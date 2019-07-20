@@ -57,7 +57,7 @@ with lib;
         };
         Network = {
             host = mkOption {
-                default = "0.0.0.0";
+                default = "localhost";
                 type = types.string;
             };
             port = mkOption {
