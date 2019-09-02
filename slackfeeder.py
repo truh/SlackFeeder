@@ -52,19 +52,17 @@ def slack_history_to_feedgen(history):
         for file in message.get("files", []):
             title = title or file.get("title", None)
 
-            link_href = file["url_private"]
+            link_href = file.get("url_private", None)
             link_rel = "alternate"
-            link_title = file["title"]
-            link.append(dict(href=link_href, rel=link_rel, title=link_title))
+            link.append(dict(href=link_href, rel=link_rel, title=title))
 
         for attachment in message.get("attachments", []):
             title = title or attachment.get("title", None)
             summary = summary or attachment.get("text", None)
 
-            link_href = attachment["from_url"]
+            link_href = attachment.get("from_url", None)
             link_rel = "alternate"
-            link_title = attachment["title"]
-            link.append(dict(href=link_href, rel=link_rel, title=link_title))
+            link.append(dict(href=link_href, rel=link_rel, title=title))
 
         fe.title(title or "Untitled")
         fe.summary(summary)
