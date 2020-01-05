@@ -76,8 +76,8 @@ let
   generated = self: {
 
     "aiohttp" = python.mkDerivation {
-      name = "aiohttp-3.5.4";
-      src = pkgs.fetchurl { url = "https://files.pythonhosted.org/packages/0f/58/c8b83f999da3b13e66249ea32f325be923791c0c10aee6cf16002a3effc1/aiohttp-3.5.4.tar.gz"; sha256 = "9c4c83f4fa1938377da32bc2d59379025ceeee8e24b89f72fcbccd8ca22dc9bf"; };
+      name = "aiohttp-3.6.2";
+      src = pkgs.fetchurl { url = "https://files.pythonhosted.org/packages/00/94/f9fa18e8d7124d7850a5715a0b9c0584f7b9375d331d35e157cee50f27cc/aiohttp-3.6.2.tar.gz"; sha256 = "259ab809ff0727d0e834ac5e8a283dc5e3e0ecc30c4d80b3cd17a4139ce1f326"; };
       doCheck = commonDoCheck;
       buildInputs = commonBuildInputs;
       propagatedBuildInputs = [
@@ -129,8 +129,8 @@ let
 
 
     "attrs" = python.mkDerivation {
-      name = "attrs-19.1.0";
-      src = pkgs.fetchurl { url = "https://files.pythonhosted.org/packages/cc/d9/931a24cc5394f19383fbbe3e1147a0291276afa43a0dc3ed0d6cd9fda813/attrs-19.1.0.tar.gz"; sha256 = "f0b870f674851ecbfbbbd364d6b5cbdff9dcedbc7f3f5e18a6891057f21fe399"; };
+      name = "attrs-19.3.0";
+      src = pkgs.fetchurl { url = "https://files.pythonhosted.org/packages/98/c3/2c227e66b5e896e15ccdae2e00bbc69aa46e9a8ce8869cc5fa96310bf612/attrs-19.3.0.tar.gz"; sha256 = "f7b7ce16570fe9965acd6d30101a28f62fb4a7f9e926b3bbc9b61f8b04247e72"; };
       doCheck = commonDoCheck;
       buildInputs = commonBuildInputs;
       propagatedBuildInputs = [ ];
@@ -144,8 +144,8 @@ let
 
 
     "certifi" = python.mkDerivation {
-      name = "certifi-2019.6.16";
-      src = pkgs.fetchurl { url = "https://files.pythonhosted.org/packages/c5/67/5d0548226bcc34468e23a0333978f0e23d28d0b3f0c71a151aef9c3f7680/certifi-2019.6.16.tar.gz"; sha256 = "945e3ba63a0b9f577b1395204e13c3a231f9bc0223888be653286534e5873695"; };
+      name = "certifi-2019.11.28";
+      src = pkgs.fetchurl { url = "https://files.pythonhosted.org/packages/41/bf/9d214a5af07debc6acf7f3f257265618f1db242a3f8e49a9b516f24523a6/certifi-2019.11.28.tar.gz"; sha256 = "25b64c7da4cd7479594d035c08c2d809eb4aab3a26e5a990ea98cc450c320f1f"; };
       doCheck = commonDoCheck;
       buildInputs = commonBuildInputs;
       propagatedBuildInputs = [ ];
@@ -189,8 +189,8 @@ let
 
 
     "multidict" = python.mkDerivation {
-      name = "multidict-4.5.2";
-      src = pkgs.fetchurl { url = "https://files.pythonhosted.org/packages/7f/8f/b3c8c5b062309e854ce5b726fc101195fbaa881d306ffa5c2ba19efa3af2/multidict-4.5.2.tar.gz"; sha256 = "024b8129695a952ebd93373e45b5d341dbb87c17ce49637b34000093f243dd4f"; };
+      name = "multidict-4.7.3";
+      src = pkgs.fetchurl { url = "https://files.pythonhosted.org/packages/84/96/5503ba866d8d216e49a6ce3bcb288df8a5fb3ac8a90b8fcff9ddcda32568/multidict-4.7.3.tar.gz"; sha256 = "be813fb9e5ce41a5a99a29cdb857144a1bd6670883586f995b940a4878dc5238"; };
       doCheck = commonDoCheck;
       buildInputs = commonBuildInputs;
       propagatedBuildInputs = [ ];
@@ -256,8 +256,8 @@ let
 
 
     "urllib3" = python.mkDerivation {
-      name = "urllib3-1.25.3";
-      src = pkgs.fetchurl { url = "https://files.pythonhosted.org/packages/4c/13/2386233f7ee40aa8444b47f7463338f3cbdf00c316627558784e3f542f07/urllib3-1.25.3.tar.gz"; sha256 = "dbe59173209418ae49d485b87d1681aefa36252ee85884c31346debd19463232"; };
+      name = "urllib3-1.25.7";
+      src = pkgs.fetchurl { url = "https://files.pythonhosted.org/packages/ad/fc/54d62fa4fc6e675678f9519e677dfc29b8964278d75333cf142892caf015/urllib3-1.25.7.tar.gz"; sha256 = "f3c5fd51747d450d4dcf6f923c81f78f811aab8205fda64b0aba34a4e48b0745"; };
       doCheck = commonDoCheck;
       buildInputs = commonBuildInputs;
       propagatedBuildInputs = [
@@ -274,8 +274,8 @@ let
 
 
     "yarl" = python.mkDerivation {
-      name = "yarl-1.3.0";
-      src = pkgs.fetchurl { url = "https://files.pythonhosted.org/packages/fb/84/6d82f6be218c50b547aa29d0315e430cf8a23c52064c92d0a8377d7b7357/yarl-1.3.0.tar.gz"; sha256 = "024ecdc12bc02b321bc66b41327f930d1c2c543fa9a561b39861da9388ba7aa9"; };
+      name = "yarl-1.4.2";
+      src = pkgs.fetchurl { url = "https://files.pythonhosted.org/packages/d6/67/6e2507586eb1cfa6d55540845b0cd05b4b77c414f6bca8b00b45483b976e/yarl-1.4.2.tar.gz"; sha256 = "58cd9c469eced558cd81aa3f484b2924e8897049e06889e8ff2510435b7ef74b"; };
       doCheck = commonDoCheck;
       buildInputs = commonBuildInputs;
       propagatedBuildInputs = [
