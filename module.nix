@@ -15,32 +15,32 @@ with lib;
         Slack = {
             token = mkOption {
                 default = "";
-                type = types.string;
+                type = types.str;
                 description = "Slack OAuth access token";
             };
         };
         Feed = {
             title = mkOption {
                 default = "SlackFeeder";
-                type = types.string;
+                type = types.str;
             };
             id = mkOption {
                 default = "";
-                type = types.string;
+                type = types.str;
             };
             link = {
                 href = mkOption {
                     default = "";
-                    type = types.string;
+                    type = types.str;
                 };
                 rel = mkOption {
                     default = "self";
-                    type = types.string;
+                    type = types.str;
                 };
             };
             description = mkOption {
                 default = "Feed generated from Slack messages.";
-                type = types.string;
+                type = types.str;
             };
         };
         Auth = {
@@ -51,14 +51,14 @@ with lib;
             };
             htpasswd = mkOption {
                 default = "";
-                type = types.string;
+                type = types.str;
                 description = "Bcrypt password hash";
             };
         };
         Network = {
             host = mkOption {
                 default = "localhost";
-                type = types.string;
+                type = types.str;
             };
             port = mkOption {
                 default = 8080;
