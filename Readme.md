@@ -64,12 +64,16 @@ Build Python environment:
 
     $ nix-build requirements.nix -A interpreter
     
-## NixOS sample configuration
+## NixOS Deployment
+
+* Add nix-channel: `sudo nix-channel --add https://github.com/truh/SlackFeeder/archive/master.tar.gz slackfeeder`
+
+* NixOS sample configuration:
 
 ```nix
 {
     imports = [
-        "${fetchTarball https://github.com/truh/SlackFeeder/archive/master.tar.gz}/module.nix"
+        <slackfeeder/module.nix>
     ];
     
     services.slackfeeder = {
