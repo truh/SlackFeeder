@@ -105,6 +105,7 @@ with lib;
         users.users.slackfeeder = {
             createHome = false;
             isSystemUser = true;
+            group = "slackfeeder";
         };
         users.groups.slackfeeder = {
             members = [ "slackfeeder" ];
