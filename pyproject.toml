@@ -6,7 +6,7 @@ authors = ["Jakob Klepp <jakob-github@truh.in>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = ">=3.8"
+python = ">=3.8,<4"
 aiohttp = "3.6.2"
 aiohttp-basicauth = "0.1.2"
 appdirs = "1.4.3"
