@@ -15,11 +15,21 @@
       let
         # see https://github.com/nix-community/poetry2nix/tree/master#api for more functions and examples.
         pkgs = nixpkgs.legacyPackages.${system};
-        inherit (poetry2nix.lib.mkPoetry2Nix { inherit pkgs; }) mkPoetryApplication;
+        inherit (poetry2nix.lib.mkPoetry2Nix { inherit pkgs; }) mkPoetryApplication mkPoetryEnv defaultPoetryOverrides overrides;
       in
       {
         packages = {
-          slackfeeder = mkPoetryApplication { projectDir = self; };
+          slackfeeder = mkPoetryApplication {
+	    projectDir = self;
+            overrides = overrides.withDefaults (self: super: {
+              slacker = super.slacker.overridePythonAttrs (old: {
+                buildInputs = (old.buildInputs or []) ++ [super.setuptools];
+              });
+	      aiohttp-basicauth = super.aiohttp-basicauth.overridePythonAttrs (old: {
+                buildInputs = (old.buildInputs or []) ++ [super.setuptools];
+              });
+            });
+	  };
           default = self.packages.${system}.slackfeeder;
         };
 
