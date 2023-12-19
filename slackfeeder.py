@@ -119,6 +119,10 @@ def webapp():
     return app
 
 
-if __name__ == "__main__":
+def main():
     app = webapp()
     web.run_app(app, **CONFIG['Network'])
+
+
+if __name__ == "__main__":
+    main()

@@ -3,7 +3,10 @@ name = "slackfeeder"
 version = "0.1.0"
 description = ""
 authors = ["Jakob Klepp <jakob-github@truh.in>"]
-readme = "README.md"
+readme = "Readme.md"
+
+[tool.poetry.scripts]
+slackfeeder = "slackfeeder:main"
 
 [tool.poetry.dependencies]
 python = ">=3.8,<4"
