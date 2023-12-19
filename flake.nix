@@ -139,7 +139,6 @@
                 User = "slackfeeder";
                 Group = "slackfeeder";
               };
-
             };
 
             users.users.slackfeeder = {
