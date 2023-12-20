@@ -55,7 +55,12 @@
             Slack = {
               token = mkOption {
                 default = "";
-                type = types.str;
+                type = types.nullOr types.str;
+                description = "Slack OAuth access token";
+              };
+              token_file = mkOption {
+                default = "";
+                type = types.nullOr types.str;
                 description = "Slack OAuth access token";
               };
             };
@@ -91,7 +96,12 @@
               };
               htpasswd = mkOption {
                 default = "";
-                type = types.str;
+                type = types.nullOr types.str;
+                description = "Bcrypt password hash";
+              };
+              htpasswd_file = mkOption {
+                default = "";
+                type = types.nullOr types.str;
                 description = "Bcrypt password hash";
               };
             };
@@ -110,7 +120,8 @@
           config = mkIf config.services.slackfeeder.enable {
             environment.etc."slackfeeder.toml".text = with config.services.slackfeeder; ''
               [Slack]
-              token = "${Slack.token}"
+              ${optionalString Slack.token != null ''token = "${Slack.token}"''}
+              ${optionalString Slack.token_file != null ''token = "${Slack.token}"''}
 
               [Feed]
               title = "${Feed.title}"
@@ -122,7 +133,8 @@
               ${optionalString Auth.enable ''
                 [Auth]
                 enable = ${toString Auth.enable}
-                htpasswd = "${Auth.htpasswd}"
+                ${optionalString Auth.htpasswd != null ''htpasswd = "${Auth.htpasswd}"''}
+                ${optionalString Auth.htpasswd_file != null ''htpasswd_file = "${Auth.htpasswd_file}"''}
               ''}
 
               [Network]
