@@ -120,8 +120,8 @@
           config = mkIf config.services.slackfeeder.enable {
             environment.etc."slackfeeder.toml".text = with config.services.slackfeeder; ''
               [Slack]
-              ${optionalString Slack.token != null ''token = "${Slack.token}"''}
-              ${optionalString Slack.token_file != null ''token = "${Slack.token}"''}
+              ${optionalString (Slack.token != null) ''token = "${Slack.token}"''}
+              ${optionalString (Slack.token_file != null) ''token = "${Slack.token}"''}
 
               [Feed]
               title = "${Feed.title}"
@@ -133,8 +133,8 @@
               ${optionalString Auth.enable ''
                 [Auth]
                 enable = ${toString Auth.enable}
-                ${optionalString Auth.htpasswd != null ''htpasswd = "${Auth.htpasswd}"''}
-                ${optionalString Auth.htpasswd_file != null ''htpasswd_file = "${Auth.htpasswd_file}"''}
+                ${optionalString (Auth.htpasswd != null) ''htpasswd = "${Auth.htpasswd}"''}
+                ${optionalString (Auth.htpasswd_file != null) ''htpasswd_file = "${Auth.htpasswd_file}"''}
               ''}
 
               [Network]
