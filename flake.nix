@@ -121,7 +121,7 @@
             environment.etc."slackfeeder.toml".text = with config.services.slackfeeder; ''
               [Slack]
               ${optionalString (Slack.token != null) ''token = "${Slack.token}"''}
-              ${optionalString (Slack.token_file != null) ''token = "${Slack.token}"''}
+              ${optionalString (Slack.token_file != null) ''token_file = "${Slack.token_file}"''}
 
               [Feed]
               title = "${Feed.title}"
