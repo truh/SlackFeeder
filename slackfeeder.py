@@ -18,7 +18,11 @@ def get_config():
 
 
 CONFIG = get_config()
-SLACK = Slacker(CONFIG["Slack"]["token"])
+SLACK = Slacker(
+    CONFIG["Slack"]["token"]
+    if "token" in CONFIG["Slack"]
+    else open(CONFIG["Slack"]["token_file"])
+)
 
 
 def get_personal_space_history():
@@ -75,7 +79,11 @@ def slack_history_to_feedgen(history):
 class CustomBasicAuth(BasicAuthMiddleware):
     async def check_credentials(self, username, password):
         try:
-            stored_user, hash = CONFIG["Auth"]["htpasswd"].split(":")
+            stored_user, hash = (
+                CONFIG["Auth"]["htpasswd"]
+                if "htpasswd" in CONFIG["Auth"]
+                else open(CONFIG["Auth"]["htpasswd_file"]
+            ).read()).split(":")
             password_matches = bcrypt.checkpw(
                 password.encode("utf-8"), hash.encode("utf-8")
             )
@@ -119,6 +127,10 @@ def webapp():
     return app
 
 
-if __name__ == "__main__":
+def main():
     app = webapp()
     web.run_app(app, **CONFIG['Network'])
+
+
+if __name__ == "__main__":
+    main()

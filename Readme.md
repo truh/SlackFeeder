@@ -49,33 +49,26 @@ by `htpasswd`.
     New password: <type password>
     Re-type new password: <type password>
     <password hash>
-
-## Developing SlackFeeder on NixOS
-
-Update dependencies:
-
-    $ pypi2nix -V 3 \
-          -e aiohttp \
-          -e https://github.com/romis2012/aiohttp-basicauth/archive/0.1.2.tar.gz#egg=aiohttp-basicauth \
-          -e slacker \
-          -e toml
-
-Build Python environment:
-
-    $ nix-build requirements.nix -A interpreter
     
 ## NixOS Deployment
 
-* Add nix-channel: `sudo nix-channel --add https://github.com/truh/SlackFeeder/archive/master.tar.gz slackfeeder`
+* Add nix flake
+
+```nix
+{
+    inputs.slackfeeder.url = "github:truh/SlackFeeder";
+    outputs = { nixpkgs, slackfeeder, ... }: {
+        nixosConfigurations.SERVER_NAME = nixpkgs.lib.nixosSystem rec {
+            modules = [slackfeeder.nixosModules.default];
+        };
+    };
+}
+```
 
 * NixOS sample configuration:
 
 ```nix
 {
-    imports = [
-        <slackfeeder/module.nix>
-    ];
-    
     services.slackfeeder = {
         enable = true;
         Slack = {
