@@ -54,12 +54,12 @@
             };
             Slack = {
               token = mkOption {
-                default = "";
+                default = null;
                 type = types.nullOr types.str;
                 description = "Slack OAuth access token";
               };
               token_file = mkOption {
-                default = "";
+                default = null;
                 type = types.nullOr types.str;
                 description = "Slack OAuth access token";
               };
@@ -95,12 +95,12 @@
                 description = "Enable basic auth";
               };
               htpasswd = mkOption {
-                default = "";
+                default = null;
                 type = types.nullOr types.str;
                 description = "Bcrypt password hash";
               };
               htpasswd_file = mkOption {
-                default = "";
+                default = null;
                 type = types.nullOr types.str;
                 description = "Bcrypt password hash";
               };
