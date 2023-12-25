@@ -39,6 +39,12 @@
         default = self.packages.${system}.slackfeeder;
       };
 
+      devShells.default = pkgs.mkShell {
+        inputsFrom = [self.packages.${system}.slackfeeder];
+        packages = [pkgs.poetry];
+      };
+    })
+    // {
       nixosModules.default = {
         config,
         lib,
@@ -165,10 +171,5 @@
             };
           };
         };
-
-      devShells.default = pkgs.mkShell {
-        inputsFrom = [self.packages.${system}.slackfeeder];
-        packages = [pkgs.poetry];
-      };
-    });
+    };
 }
